@@ -2,6 +2,8 @@
 ```diff
 + API using Laravel
 - Dockerise everything including database
+(it doesn't make sense to do that because it will work with any database you choose, instead,
+I provided a example of docker contianer to run Laravel 9)
 + Persist everything on PostgreSQL or MySQL
 (.env defined - Everything is compatible with SQLite, MySQL and PostgreSQL)
 + Create routes as defined bellow:
