@@ -55,48 +55,7 @@ class BookController extends Controller
         'user_id' => Auth::user()->id
       ]);
       if (isset($request->indices)) {
-        $indices = $request->indices;
-        foreach ($indices as $k0 => $indx) {
-          $index = BookIndex::create([
-            'book_id' => $obj->id,
-            'title' => $indx['title'],
-            'page' => $indx['page']
-          ]);
-
-          if (isset($indx['sub_indices'])) {
-            $subIndices1 = $indx['sub_indices'];
-            foreach ($subIndices1 as $k1 => $sindx1) {
-              $sindex1 = BookIndex::create([
-                'book_id' => $obj->id,
-                'title' => $sindx1['title'],
-                'page' => $sindx1['page'],
-                'index_id' => $index->id
-              ]);
-            }
-            if (isset($sindx1['sub_indices'])) {
-              $subIndices2 = $sindx1['sub_indices'];
-              foreach ($subIndices2 as $k1 => $sindx2) {
-                $sindex2 = BookIndex::create([
-                  'book_id' => $obj->id,
-                  'title' => $sindx2['title'],
-                  'page' => $sindx2['page'],
-                  'index_id' => $sindex1->id
-                ]);
-              }
-              if (isset($sindx2['sub_indices'])) {
-                $subIndices2 = $sindx2['sub_indices'];
-                foreach ($subIndices2 as $k1 => $sindx3) {
-                  $sindex3 = BookIndex::create([
-                    'book_id' => $obj->id,
-                    'title' => $sindx3['title'],
-                    'page' => $sindx3['page'],
-                    'index_id' => $sindex2->id
-                  ]);
-                }
-              }
-            }
-          }
-        }
+        $this->processIndices($obj->id, $request->indices);
       }
       DB::commit();
       return $this->sendResponse($obj, 'Book created by '. Auth::user()->id);
@@ -111,5 +70,18 @@ class BookController extends Controller
     $obj->title = $request->title;
     $obj->save();
     return $this->sendResponse($obj, 'Book updated');
+  }
+  private function processIndices($book_id, $items, $index_id = null) {
+    foreach ($items as $item) {
+      $index = BookIndex::create([
+        'book_id' => $book_id,
+        'title' => $item['title'],
+        'page' => $item['page'],
+        'index_id' => $index_id,
+      ]);
+      if (isset($item['sub_indices'])) {
+        $this->processIndices($book_id, $item['sub_indices'], $index->id);
+      }
+    }
   }
 }
