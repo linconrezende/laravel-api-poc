@@ -1,3 +1,97 @@
+## TO-DO:
+:fa-check: API using Laravel
+:fa-check: Persist everything on PostgreSQL or MySQL (.env defined - Everything is compatible with SQLite, MySQL and PostgreSQL)
+:fa-check: Create routes as defined bellow:
+:fa-times: POST v1/auth/token 
+insted I created (both return a bearer token to be used later on):
+. POST api/v1/register
+. POST api/v1/login
+
+:fa-times: GET v1/livros (?titulo=&titulo_do_indice=)
+Insted I created
+:fa-check: GET v1/books (?title=&index_title=) with pagination
+
+:fa-times: POST v1/livros/{livroId}/importar-indices-xml
+:fa-times: Create a job to import xml
+Not implemented yet
+
+:fa-times: Routes and result body must be as described
+(they are not, because I decided to do everything in english and use pagination)
+:fa-times: Unit tests
+:fa-check: Publish on GitHub
+
+:fa-times: POST v1/livros
+Insted I created
+:fa-check: POST v1/books
+body example: 
+```json
+{
+    "title": "Book title 226",
+    "page": 1,
+    "indices": [
+        {
+            "title": "Indice 1",
+            "page": 2,
+            "sub_indices": [
+                {
+                    "title": "Indice 1.1",
+                    "page": 3,
+                    "sub_indices": [
+                        {
+                            "title": "Indice 1.1.1",
+                            "page": 4
+                        },
+                        {
+                            "title": "Indice 1.1.2",
+                            "page": 5
+                        },
+                        {
+                            "title": "Indice 1.1.3",
+                            "page": 6,
+                            "sub_indices": [
+                                {
+                                    "title": "Indice 1.1.3.1",
+                                    "page": 7
+                                },
+                                {
+                                    "title": "Indice 1.1.3.2",
+                                    "page": 5
+                                },
+                                {
+                                    "title": "Indice 1.1.3.3",
+                                    "page": 9,
+                                    "sub_indices": [
+                                        {
+                                            "title": "Indice 1.1.3.3.1",
+                                            "page": 7,
+                                            "sub_indices": [
+                                                {
+                                                    "title": "Indice 1.1.3.3.1.1",
+                                                    "page": 7,
+                                                    "sub_indices": [
+                                                        {
+                                                            "title": "Indice 1.1.3.3.1.1.1",
+                                                            "page": 7
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
+
+------------
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
