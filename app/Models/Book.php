@@ -21,4 +21,8 @@ class Book extends Model
     {
         return $this->hasMany(BookIndex::class, 'book_id', 'id')->where('index_id', null)->with('subIndices');
     }
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

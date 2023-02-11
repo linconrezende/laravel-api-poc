@@ -30,7 +30,7 @@ class BookController extends Controller
       ->whereRaw("book_indices.title LIKE '%$request->index_title%'");
     }
 
-    $lstObj = $queryBuilder->with('indices')->distinct()->paginate($perPage);
+    $lstObj = $queryBuilder->with('indices')->with('user')->distinct()->paginate($perPage);
     return $this->sendResponse($lstObj, 'Book list');
   }
   public function create(Request $request)
