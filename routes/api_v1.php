@@ -19,4 +19,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('register', 'register');
     Route::post('login', 'login');
 });
+
 Route::get('/books', [BookController::class, 'list'])->middleware('auth:sanctum');
+Route::post('/books', [BookController::class, 'create'])->middleware('auth:sanctum');
+Route::patch('/books/{book_id}', [BookController::class, 'update'])->middleware('auth:sanctum');

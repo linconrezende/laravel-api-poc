@@ -8,7 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
-    protected $fillable = ['title'];
-    protected $hidden = [];
-    protected $casts = [];
+    protected $fillable = ['title', 'user_id'];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+    protected $casts = [
+        'user_id' => 'integer'
+    ];
+    
+    public function indices()
+    {
+        return $this->hasMany(BookIndex::class, 'book_id', 'id')->with('subIndices');
+    }
 }

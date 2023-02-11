@@ -20,4 +20,8 @@ class BookIndex extends Model
         'index_id' => 'integer',
         'book_id' => 'integer',
     ];
+    public function subIndices()
+    {
+        return $this->hasMany(BookIndex::class, 'id', 'index_id')->with('subIndices');
+    }
 }
