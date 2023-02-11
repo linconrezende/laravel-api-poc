@@ -1,7 +1,9 @@
 ## TO-DO:
 ```diff
 + API using Laravel
-+ Persist everything on PostgreSQL or MySQL (.env defined - Everything is compatible with SQLite, MySQL and PostgreSQL)
+- Dockerise everything including database
++ Persist everything on PostgreSQL or MySQL
+(.env defined - Everything is compatible with SQLite, MySQL and PostgreSQL)
 + Create routes as defined bellow:
 - POST v1/auth/token 
 insted I created (both return a bearer token to be used later on):
