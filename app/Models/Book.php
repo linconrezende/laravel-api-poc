@@ -19,6 +19,6 @@ class Book extends Model
     
     public function indices()
     {
-        return $this->hasMany(BookIndex::class, 'book_id', 'id')->with('subIndices');
+        return $this->hasMany(BookIndex::class, 'book_id', 'id')->where('index_id', null)->with('subIndices');
     }
 }
