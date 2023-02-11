@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\BookIndex;
+use App\Rules\ValidateNestedArray;
 use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,17 +37,17 @@ class BookController extends Controller
   }
   public function create(Request $request)
   {
-    // this will check for 3 levels only, further validation will be done aftewards
     $validator = Validator::make($request->all(), [
       'title' => 'required',
       'page' => 'required|integer',
-      'indices' => 'array',
-      'indices.*.title' => 'required',
-      'indices.*.page' => 'required|integer',
-      'indices.*.sub_indices.*.title' => 'required',
-      'indices.*.sub_indices.*.page' => 'required|integer',
-      'indices.*.sub_indices.*.sub_indices.*.title' => 'required',
-      'indices.*.sub_indices.*.sub_indices.*.page' => 'required|integer',
+      'indices' => [new ValidateNestedArray([
+        '*.title' => 'required|string',
+        '*.page' => 'required|numeric',
+        '*.sub_indices' => [new ValidateNestedArray([
+          '*.title' => 'required|string',
+          '*.page' => 'required|numeric',
+        ])],
+      ])]
     ]);
     if ($validator->fails()) {
       return $this->sendError('Validation Error.', $validator->errors());
