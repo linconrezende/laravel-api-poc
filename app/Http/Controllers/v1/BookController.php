@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\BookIndex;
+use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -35,9 +36,11 @@ class BookController extends Controller
   }
   public function create(Request $request)
   {
+    // this will check for 3 levels only, further validation will be done aftewards
     $validator = Validator::make($request->all(), [
       'title' => 'required',
       'page' => 'required|integer',
+      'indices' => 'array',
       'indices.*.title' => 'required',
       'indices.*.page' => 'required|integer',
       'indices.*.sub_indices.*.title' => 'required',
@@ -73,6 +76,9 @@ class BookController extends Controller
   }
   private function processIndices($book_id, $items, $index_id = null) {
     foreach ($items as $item) {
+      if (!isset($item['title']) || !isset($item['page'])) {
+        throw new Error('Title and/or page not found');
+      }
       $index = BookIndex::create([
         'book_id' => $book_id,
         'title' => $item['title'],
