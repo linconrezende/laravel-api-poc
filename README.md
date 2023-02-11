@@ -1,28 +1,30 @@
 ## TO-DO:
-:fa-check: API using Laravel
-:fa-check: Persist everything on PostgreSQL or MySQL (.env defined - Everything is compatible with SQLite, MySQL and PostgreSQL)
-:fa-check: Create routes as defined bellow:
-:fa-times: POST v1/auth/token 
+```diff
++ API using Laravel
++ Persist everything on PostgreSQL or MySQL (.env defined - Everything is compatible with SQLite, MySQL and PostgreSQL)
++ Create routes as defined bellow:
+- POST v1/auth/token 
 insted I created (both return a bearer token to be used later on):
-. POST api/v1/register
-. POST api/v1/login
++ POST api/v1/register
++ POST api/v1/login
 
-:fa-times: GET v1/livros (?titulo=&titulo_do_indice=)
+- GET v1/livros (?titulo=&titulo_do_indice=)
 Insted I created
-:fa-check: GET v1/books (?title=&index_title=) with pagination
++ GET v1/books (?title=&index_title=) with pagination
 
-:fa-times: POST v1/livros/{livroId}/importar-indices-xml
-:fa-times: Create a job to import xml
+! POST v1/livros/{livroId}/importar-indices-xml
+! Create a job to import xml
 Not implemented yet
 
-:fa-times: Routes and result body must be as described
-(they are not, because I decided to do everything in english and use pagination)
-:fa-times: Unit tests
-:fa-check: Publish on GitHub
+Routes and result body must be as described
+! (they are not, because I decided to do everything in english and use pagination)
+- Unit tests
++ Publish on GitHub
 
-:fa-times: POST v1/livros
+- POST v1/livros
 Insted I created
-:fa-check: POST v1/books
++ POST v1/books
+```
 body example: 
 ```json
 {
