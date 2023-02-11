@@ -23,6 +23,7 @@ Not implemented yet
 Routes and result body must be as described
 ! (they are not, because I decided to do everything in english and use pagination)
 - Unit tests
+- Factory
 + Publish on GitHub
 
 - POST v1/livros
